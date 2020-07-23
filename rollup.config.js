@@ -21,9 +21,18 @@ export default {
       dev: !production,
       // we'll extract any component CSS out into
       // a separate file - better for performance
-      css: (css) => {
+      /* css: (css) => {
         css.write("public/build/bundle.css");
+      }, */
+    }),
+
+    postcss({
+      config: {
+        path: "./postcss.config.js",
       },
+      extensions: [".css"],
+      extract: true,
+      minimize: production,
     }),
 
     // If you have external dependencies installed from
@@ -36,15 +45,6 @@ export default {
       dedupe: ["svelte"],
     }),
     commonjs(),
-    postcss({
-      config: {
-        path: "./postcss.config.js",
-      },
-      extensions: [".css"],
-      extract: true,
-      minimize: production,
-      // modules: true,
-    }),
 
     // In dev mode, call `npm run start` once
     // the bundle has been generated

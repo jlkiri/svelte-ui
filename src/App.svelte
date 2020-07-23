@@ -1,34 +1,30 @@
 <script>
-  export let name;
+  import { dndzone } from "svelte-dnd-action";
+  import LeftZone from "./LeftZone.svelte";
+  import RightZone from "./RightZone.svelte";
+  let itemsLeft = [
+    { id: 1, name: "item1" },
+    { id: 2, name: "item2" },
+    { id: 3, name: "item3" },
+    { id: 4, name: "item4" }
+  ];
+  let itemsRight = [
+    { id: 5, name: "item1" },
+    { id: 6, name: "item2" },
+    { id: 7, name: "item3" },
+    { id: 8, name: "item4" }
+  ];
 </script>
 
 <style>
-  main {
-    text-align: center;
-    padding: 1em;
-    max-width: 240px;
-    margin: 0 auto;
-  }
-
-  h1 {
-    color: #ff3e00;
-    text-transform: uppercase;
-    font-size: 4em;
-    font-weight: 100;
-  }
-
-  @media (min-width: 640px) {
-    main {
-      max-width: none;
-    }
+  :global(body, html) {
+    margin: 0;
+    padding: 0;
+    height: 100%;
   }
 </style>
 
-<main>
-  <h1 class="pt-4">Hello {name}!</h1>
-  <p>
-    Visit the
-    <a href="https://svelte.dev/tutorial">Svelte tutorial</a>
-    to learn how to build Svelte apps.
-  </p>
+<main class="flex h-full">
+  <LeftZone items={itemsLeft} />
+  <RightZone items={itemsRight} />
 </main>
