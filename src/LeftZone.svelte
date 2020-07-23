@@ -1,11 +1,13 @@
 <script>
   import { dndzone } from "svelte-dnd-action";
-  export let items;
+  import { styles } from "./values.js";
+  export let components;
+
   function handleDndConsider(e) {
-    items = e.detail.items;
+    components = e.detail.items;
   }
   function handleDndFinalize(e) {
-    items = e.detail.items;
+    components = e.detail.items;
   }
 </script>
 
@@ -14,10 +16,13 @@
 </style>
 
 <section
-  use:dndzone={{ items }}
+  class="w-full p-4"
+  use:dndzone={{ items: components }}
   on:consider={handleDndConsider}
   on:finalize={handleDndFinalize}>
-  {#each items as item (item.id)}
-    <div class="p-4 border border-gray-500">{item.name}</div>
+  {#each components as component (component.id)}
+    <div class={`p-${$styles.padding} border border-gray-500`}>
+      {$styles.text}
+    </div>
   {/each}
 </section>
