@@ -93,11 +93,15 @@
   function handleDndFinalize(e) {
     components = e.detail.items;
   }
-  function handleDndConsiderNested(e) {
-    nestedItems = e.detail.items;
+  function handleDndConsiderNested(cid, e) {
+    const idx = components.findIndex(c => c.id === cid);
+    components[idx].items = e.detail.items;
+    components = [...components];
   }
-  function handleDndFinalizeNested(e) {
-    nestedItems = e.detail.items;
+  function handleDndFinalizeNested(cid, e) {
+    const idx = components.findIndex(c => c.id === cid);
+    components[idx].items = e.detail.items;
+    components = [...components];
   }
 </script>
 
@@ -117,8 +121,8 @@
     <div
       class="w-full p-4"
       use:dndzone={{ items: component.items, type: 'inner' }}
-      on:consider={handleDndConsiderNested}
-      on:finalize={handleDndFinalizeNested}>
+      on:consider={e => handleDndConsiderNested(component.id, e)}
+      on:finalize={e => handleDndFinalizeNested(component.id, e)}>
       {#each component.items as item (item.id)}
         <div class={`p-${$styles.padding}  p-4 border border-red-500`}>
           {$styles.text}
