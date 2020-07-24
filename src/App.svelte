@@ -2,13 +2,6 @@
   import { dndzone } from "svelte-dnd-action";
   import LeftZone from "./LeftZone.svelte";
   import RightZone from "./RightZone.svelte";
-  let itemsLeft = [];
-  let itemsRight = [
-    { id: 5, name: "item1" },
-    { id: 6, name: "item2" },
-    { id: 7, name: "item3" },
-    { id: 8, name: "item4" }
-  ];
 </script>
 
 <style>
@@ -20,6 +13,6 @@
 </style>
 
 <main class="flex h-full w-full">
-  <LeftZone components={itemsLeft} />
-  <RightZone components={itemsRight} />
+  <LeftZone />
+  <RightZone />
 </main>

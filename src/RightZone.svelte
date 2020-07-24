@@ -1,7 +1,9 @@
 <script>
   import { dndzone } from "svelte-dnd-action";
-
   import { styles } from "./values.js";
+
+  let step = 1;
+
   let components = [
     {
       id: 0
@@ -14,6 +16,26 @@
   function handleDndFinalize(e) {
     components = e.detail.items;
   }
+
+  const adjustStep = inputVal => {
+    if (inputVal < 6) {
+      return 1;
+    }
+
+    if (inputVal < 12) {
+      return 2;
+    }
+
+    if (inputVal < 24) {
+      return 4;
+    }
+
+    return 8;
+  };
+
+  const handleRangeChange = e => {
+    step = adjustStep(e.target.value);
+  };
 </script>
 
 <style>
@@ -35,11 +57,14 @@
     <h2 class="text-2xl font-bold">Properties</h2>
     <label for="padding">Padding: {$styles.padding}</label>
     <input
+      {step}
       type="range"
       id="padding"
+      on:input={handleRangeChange}
       name="padding"
       min="0"
-      max="10"
+      max="64"
+      list="padding-values"
       bind:value={$styles.padding} />
     <label for="color">Text</label>
     <input type="text" id="text" name="text" bind:value={$styles.text} />
